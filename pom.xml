@@ -26,19 +26,14 @@
             <id>papermc</id>
             <url>https://repo.papermc.io/repository/maven-public/</url>
         </repository>
-        <!-- Artifactory universe 仓库（包含 alpha 构建版本） -->
-        <repository>
-            <id>papermc-universe</id>
-            <url>https://artifactory.papermc.io/artifactory/universe/</url>
-        </repository>
     </repositories>
 
     <dependencies>
-        <!-- Paper API，编译时使用最新 API，运行时兼容 1.16.5-26.1.2 -->
+        <!-- Paper API，编译时使用最新稳定版，运行时兼容 1.16.5-1.21.4 -->
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
-            <version>26.1.2.build.9-alpha</version>
+            <version>1.21.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
