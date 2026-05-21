@@ -177,10 +177,10 @@ public class RideAllMobs extends JavaPlugin implements Listener {
         }
 
         // ============ 5. 应用速度倍率 ============
-        if (speedMultiplier != 1.0 && target.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED) != null) {
-            double originalSpeed = target.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).getBaseValue();
+        if (speedMultiplier != 1.0 && target.getAttribute(Attribute.MOVEMENT_SPEED) != null) {
+            double originalSpeed = target.getAttribute(Attribute.MOVEMENT_SPEED).getBaseValue();
             originalSpeeds.put(target.getUniqueId(), originalSpeed);
-            target.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(originalSpeed * speedMultiplier);
+            target.getAttribute(Attribute.MOVEMENT_SPEED).setBaseValue(originalSpeed * speedMultiplier);
         }
 
         // ============ 6. 骑乘！将玩家添加到目标生物的乘客列表中 ============
@@ -207,8 +207,8 @@ public class RideAllMobs extends JavaPlugin implements Listener {
         if (vehicle instanceof LivingEntity) {
             Double originalSpeed = originalSpeeds.remove(vehicle.getUniqueId());
             if (originalSpeed != null
-                    && ((LivingEntity) vehicle).getAttribute(Attribute.GENERIC_MOVEMENT_SPEED) != null) {
-                ((LivingEntity) vehicle).getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(originalSpeed);
+                    && ((LivingEntity) vehicle).getAttribute(Attribute.MOVEMENT_SPEED) != null) {
+                ((LivingEntity) vehicle).getAttribute(Attribute.MOVEMENT_SPEED).setBaseValue(originalSpeed);
             }
         }
 
