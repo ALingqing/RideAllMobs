@@ -1,0 +1,12 @@
+# RideAllMobs - 插件主配置文件
+# 作者: 阿清
+# 空手右键任意生物即可骑乘
+
+name: RideAllMobs
+version: "1.0.0"
+main: top.chenray.RideAllMobs
+api-version: "1.16"
+folia-supported: true
+author: 阿清
+description: 允许玩家空手右键任意活着的生物进行骑乘
+website: https://github.com/chenray/RideAllMobs
