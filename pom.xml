@@ -26,6 +26,11 @@
             <id>papermc</id>
             <url>https://repo.papermc.io/repository/maven-public/</url>
         </repository>
+        <!-- Artifactory universe 仓库（包含 alpha 构建版本） -->
+        <repository>
+            <id>papermc-universe</id>
+            <url>https://artifactory.papermc.io/artifactory/universe/</url>
+        </repository>
     </repositories>
 
     <dependencies>
