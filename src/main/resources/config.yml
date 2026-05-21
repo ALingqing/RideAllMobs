@@ -1,0 +1,26 @@
+# RideAllMobs 配置文件
+# 作者: 阿清
+
+# 骑乘模式: WHITELIST (白名单, 仅允许列表中生物) / BLACKLIST (黑名单, 禁止列表中生物, 默认)
+mount-mode: BLACKLIST
+
+# 实体列表 (使用 Bukkit EntityType 枚举名称, 如 ZOMBIE, SKELETON, CREEPER 等)
+# 根据 mount-mode 决定是白名单还是黑名单
+entity-list:
+  # 默认黑名单包含三个 BOSS 生物, 防止骑乘后破坏 BOSS 战斗机制
+  - WITHER
+  - ENDER_DRAGON
+  - WARDEN
+
+# 是否禁止骑乘其他玩家已驯服的宠物 (狗、猫、马、鹦鹉等)
+protect-tamed-pets: true
+
+# 骑乘速度倍率 (1.0 = 原版速度, 2.0 = 两倍速度, 0.5 = 一半速度)
+speed-multiplier: 1.0
+
+# 下坐骑时是否返回骑乘前的位置
+return-to-previous-location: true
+
+# 下坐骑安全传送 (如果下坐骑位置不安全, 自动寻找安全位置传送)
+# 仅在 return-to-previous-location 为 true 时生效
+safe-dismount: true

@@ -9,6 +9,11 @@
 - 按 Shift（潜行键）正常下坐骑，生物继续正常活动
 - 骑乘期间，被骑乘的生物保持原有 AI 行为，不会冻结或停止
 - 玩家手持任何物品时，右键生物保持原版交互逻辑（如喂食、攻击、交易等），不触发骑乘
+- [配置] 实体黑名单/白名单 -- 自定义禁止或允许骑乘的生物类型
+- [配置] 已驯服宠物保护 -- 禁止骑乘其他玩家驯服的狗、猫、马、鹦鹉等
+- [配置] 速度倍率调节 -- 骑乘时调整被骑生物的移动速度
+- [配置] 下坐骑保留位置 -- 下坐骑时回到骑乘前的位置
+- [配置] 安全传送 -- 下坐骑时自动检测并传送到安全位置
 
 ## 生效范围
 
@@ -43,7 +48,7 @@
 1. 从 Releases 页面下载最新版本的 `RideAllMobs-1.0.0.jar`
 2. 将 JAR 文件放入服务端的 `plugins` 文件夹
 3. 重启服务器或使用 `/reload` 命令加载插件
-4. 无需任何配置，开箱即用
+4. 默认无需额外配置，开箱即用
 
 ## 使用方法
 
@@ -51,6 +56,21 @@
 2. 右键点击任意生物实体
 3. 即可骑乘到该生物上
 4. 按 Shift（潜行键）下坐骑
+
+## 配置说明
+
+首次启动后会在 `plugins/RideAllMobs/config.yml` 生成配置文件，支持以下选项：
+
+| 配置项 | 类型 | 默认值 | 说明 |
+|--------|------|--------|------|
+| `mount-mode` | String | `BLACKLIST` | 黑白名单模式: `WHITELIST` (白名单) / `BLACKLIST` (黑名单) |
+| `entity-list` | List | `[WITHER, ENDER_DRAGON, WARDEN]` | 实体类型名列表, 根据 mount-mode 决定允许/禁止骑乘 |
+| `protect-tamed-pets` | boolean | `true` | 是否禁止骑乘其他玩家已驯服的宠物 |
+| `speed-multiplier` | double | `1.0` | 骑乘速度倍率 (1.0=原版, 2.0=两倍, 0.5=一半) |
+| `return-to-previous-location` | boolean | `true` | 下坐骑是否回到骑乘前的位置 |
+| `safe-dismount` | boolean | `true` | 下坐骑时是否检测并传送到安全位置 (仅在 return-to-previous-location=true 时生效) |
+
+修改配置文件后需要重启服务器或使用 `/reload` 使配置生效。
 
 ## 构建方法
 
@@ -73,19 +93,22 @@ mvn clean package
 
 ## 技术原理
 
-- 监听 `PlayerInteractEntityEvent` 事件
-- 检查玩家主手是否为空（`Material.AIR`）
-- 检查目标是否为 LivingEntity 且非 ArmorStand
+- 监听 `PlayerInteractEntityEvent` 事件，实现空手骑乘
+- 检查玩家主手是否为空（`Material.AIR`），手持物品时保持原版交互
+- 检查目标是否为 LivingEntity 且非 ArmorStand，自动过滤非生物实体
 - 使用 `Entity.addPassenger(Player)` 方法实现骑乘
 - 使用 `Player.leaveVehicle()` 在切换坐骑时先下坐骑
+- 监听 `VehicleExitEvent` 事件，处理速度恢复和下坐骑传送
+- 使用 `Tameable` / `AbstractHorse` 接口判断宠物驯服归属
+- 使用 `Attribute.GENERIC_MOVEMENT_SPEED` 实现速度倍率调节
 - 玩家按 Shift 下坐骑依赖原版 Minecraft 机制
 
 ## 依赖与权限
 
-- 无配置文件
+- 配置文件: `config.yml` (自动生成)
 - 无权限系统
 - 无指令
-- 完全开箱即用
+- 开箱即用，修改配置后重启服务器生效
 
 ## 作者
 
