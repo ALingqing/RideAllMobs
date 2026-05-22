@@ -1,6 +1,6 @@
 # RideAllMobs
 
-[![Build](https://github.com/chenray/RideAllMobs/actions/workflows/build.yml/badge.svg)](https://github.com/chenray/RideAllMobs/actions/workflows/build.yml)
+[![pmpiVlF.png](https://s41.ax1x.com/2026/05/22/pmpiVlF.png)](https://imgchr.com/i/pmpiVlF)
 
 一个 Minecraft 服务端插件，支持所有服务端核心（Bukkit/Spigot/Paper/Purpur/Leaves/Folia 等），允许玩家在空手时右键点击任意生物实体进行骑乘。
 
