@@ -24,3 +24,14 @@ return-to-previous-location: true
 # 下坐骑安全传送 (如果下坐骑位置不安全, 自动寻找安全位置传送)
 # 仅在 return-to-previous-location 为 true 时生效
 safe-dismount: true
+
+# 是否允许玩家骑乘其他玩家（叠罗汉）
+# true: 空手右键其他玩家即可骑上去
+# false: 不允许骑乘玩家
+allow-player-riding: false
+
+# 是否允许叠罗汉（被骑乘的玩家可以同时骑乘其他生物/玩家）
+# 例如: 玩家C 骑 玩家B, 玩家B 骑 玩家A
+# true: 允许叠罗汉
+# false: 正在骑乘其他实体的玩家不能被骑乘
+allow-stacking: false

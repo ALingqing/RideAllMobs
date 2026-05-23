@@ -61,6 +61,12 @@ public class RideAllMobs extends JavaPlugin implements Listener {
     /** 下坐骑是否安全传送 */
     private boolean safeDismount;
 
+    /** 是否允许骑乘其他玩家 */
+    private boolean allowPlayerRiding;
+
+    /** 是否允许叠罗汉（被骑乘的玩家可以同时骑乘其他实体） */
+    private boolean allowStacking;
+
     // ==================== 插件生命周期 ====================
 
     @Override
@@ -96,6 +102,8 @@ public class RideAllMobs extends JavaPlugin implements Listener {
         speedMultiplier = config.getDouble("speed-multiplier", 1.0);
         returnToPreviousLocation = config.getBoolean("return-to-previous-location", true);
         safeDismount = config.getBoolean("safe-dismount", true);
+        allowPlayerRiding = config.getBoolean("allow-player-riding", false);
+        allowStacking = config.getBoolean("allow-stacking", false);
     }
 
     // ==================== 事件监听: 骑乘 ====================
@@ -146,6 +154,18 @@ public class RideAllMobs extends JavaPlugin implements Listener {
         // 不能骑乘自己
         if (target.equals(player)) {
             return;
+        }
+
+        // ============ 0. 玩家骑乘检查 ============
+        if (target instanceof Player) {
+            // 未开启玩家骑乘
+            if (!allowPlayerRiding) {
+                return;
+            }
+            // 未开启叠罗汉，且目标玩家正在骑乘其他实体
+            if (!allowStacking && ((Player) target).isInsideVehicle()) {
+                return;
+            }
         }
 
         // ============ 1. 黑名单/白名单检查 ============
